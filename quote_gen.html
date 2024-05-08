@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUOTE GENERATOR</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #9b6c32; /* background color */
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #quote {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #search {
+        margin-bottom: 20px;
+    }
+    .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 40px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>QUOTE GENERATOR</h1>
+
+    <input type="text" id="search" placeholder="Search for a quote">
+    <div id="quote"></div>
+</div>
+
+<script>
+    const quotes = [
+        "The only way to do great work is to love what you do. - Steve Jobs",
+        "Innovation distinguishes between a leader and a follower. - Steve Jobs",
+        "Stay hungry, stay foolish. - Steve Jobs",
+        "Your time is limited, don't waste it living someone else's life. - Steve Jobs",
+        "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
+        "The way to get started is to quit talking and begin doing. - Walt Disney",
+        "Life is what happens when you're busy making other plans. - John Lennon",
+        "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
+        "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+        "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
+        "The only source of knowledge is experience. - Albert Einstein",
+        "Life is like riding a bicycle. To keep your balance, you must keep moving. - Albert Einstein",
+        "The best way to predict the future is to invent it. - Alan Kay",
+        "It does not matter how slowly you go as long as you do not stop. - Confucius",
+        "The journey of a thousand miles begins with one step. - Lao Tzu"
+    ];
+
+    const quoteDisplay = document.getElementById('quote');
+    const searchInput = document.getElementById('search');
+
+    function getRandomQuote() {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        return quotes[randomIndex];
+    }
+
+    function displayQuote(quote) {
+        quoteDisplay.textContent = quote;
+    }
+
+    function searchQuote(query) {
+        const filteredQuotes = quotes.filter(quote => quote.toLowerCase().includes(query.toLowerCase()));
+        return filteredQuotes;
+    }
+
+    function handleSearch() {
+        const query = searchInput.value.trim();
+        if (query !== '') {
+            const searchResults = searchQuote(query);
+            if (searchResults.length > 0) {
+                const randomIndex = Math.floor(Math.random() * searchResults.length);
+                displayQuote(searchResults[randomIndex]);
+            } else {
+                displayQuote("No matching quotes found.");
+            }
+        } else {
+            displayQuote(getRandomQuote());
+        }
+    }
+
+    searchInput.addEventListener('input', handleSearch);
+
+    displayQuote(getRandomQuote());
+</script>
+
+</body>
+</html>
